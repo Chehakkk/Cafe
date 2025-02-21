@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Dessert</title>
+</head>
+<body>
+    <div class="container">
+      
+        <div class="row">
+            <div class="col-md-12">
+
+
+                <nav class="mainnav shadow navbar-expand-lg navbar navbar-dark bg-dark fixed-top"
+                    style="min-width: 350px">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">
+                            <i class="bi bi-soundwave"></i> Cafeteria
+                            <div style="font-size: 13px">Hello Foodie !</div>
+                        </a>
+
+                        <div>
+                            <div class="input-group ">
+                                <input type="text" class="form-control" placeholder="Search"
+                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <span class="bg-black text-white border-0 input-group-text" id="basic-addon2"><i
+                                        class="bi bi-search"></i></span>
+                            </div>
+                        </div>
+
+
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                                </li>
+                                <!-- <li class="nav-item">
+                                <a class="nav-link" href="#">Discover</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Trending</a>
+                            </li> -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/new">New</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><span><i class="bi bi-bookmark-heart"></i></span></a>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Place
+                                    </a>
+                                    <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item text-white" href="/catfilterd/1">Cafe</a></li>
+                                        <li><a class="dropdown-item text-white" href="/catfilterd/2">Club</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item text-white" href="/catfilterd/3">Restaurant</a></li>
+                                    </ul>
+                                </li>
+
+                                <!-- <img class="rounded-circle" src="{% static 'images/14.jpg' %}" style="width:40px;height:40px"> -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span>
+                                            <i class="bi bi-person-circle"></i>
+                                        </span>
+                                        {% if username %}
+                                        Hi ,{{username}}!
+                                        {% endif %}
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end bg-dark"
+                                        aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item text-white" href="#"><i class="bi bi-person"></i>
+                                                Profile</a></li>
+                                        <li><a class="dropdown-item text-white" href="#"><i class="bi bi-gear"></i>
+                                                Settings</a>
+                                        </li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item text-white" href="/logout"><i
+                                                    class="bi bi-box-arrow-right"></i>
+                                                Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!--end navigation-->
+        <!-- <div class="row"> -->
+            <div class="row row-cols-1 row-cols-md-2 g-4 p-5 mb-3 mt-2">
+               {% for d in desserts %}
+                <div class="col-md-4">
+                  <div class="card bg-dark">
+                    <img src="{{d.image.url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title text-white">{{d.name}}</h5>
+                      <p class="card-title text-light">{{d.detail}}</p>
+                      <p class="card-text  text-light"> Outlets : {{d.place}}</p>
+                      <p class="card-text text-light"> <span><i class="bi bi-geo-alt-fill"></i></span> {{d.address}}</p>
+                      <p class="card-text text-light"> Rating :{{d.rating}}</p>
+                      <p class="card-text"> <span><i class="bi bi-phone"></i></span> {{d.contact}}</p>
+                      {% if  d.category == 1 %}
+                      <p class="card-text"> Cafe</p>
+                      {% elif d.category == 2 %}
+                      <p class="card-text">Club</p>
+                      {% elif d.category == 3 %}
+                      <p class="card-text"> Restaurant</p>
+                      {% endif %}
+  
+                      <a href="/addtowish/{{desserts.id}}" class="btn btn-success"> Add To Wishlish...</a>
+                      <a href="/reservation" class="btn btn-danger"> Reservation</a>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                
+               
+        <!-- </div> -->
+    </div>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>
